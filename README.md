@@ -6,7 +6,7 @@ Página estática de un solo archivo (`index.html`) con un mapa interactivo (Lea
 
 ```bash
 git init
-git add index.html README.md
+git add index.html README.md banner.png
 git commit -m "Mapa de grupos scout de Valparaíso"
 git branch -M main
 git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
@@ -35,9 +35,9 @@ const grupos = [
 ];
 ```
 
-**Pendiente:** la ubicación de **Grupo Scout Aquitania** es aproximada porque no se encontró una dirección exacta de su sede públicamente. Ajusta `lat`/`lng` en ese objeto cuando tengas el dato real.
-
 ## Notas de esta versión
+
+- **Encabezado con banner oficial:** el header ahora muestra `banner.png` (la imagen que enviaste, de la Agrupación Nacional de Boy Scouts de Chile — Localidad de Valparaíso) a todo el ancho. Si más adelante quieres cambiarla, solo reemplaza ese archivo por otro con el mismo nombre y las mismas proporciones (o ajusta `max-height` en el CSS si cambian mucho).
 
 - **Mapa acotado a Valparaíso:** se definió `valpoBounds` (variable al final del `<script>`) que limita el arrastre y el zoom-out del mapa solo al área de Valparaíso. Si agregas un grupo fuera de ese rango, amplía esas coordenadas.
 - **Tiles sin API key:** se usa el servidor de tiles estándar de OpenStreetMap (`tile.openstreetmap.org`), gratuito y sin necesidad de registrarte. (La versión anterior usaba CARTO, que ahora exige una API key y por eso aparecía la marca de agua "API KEY REQUIRED".)
