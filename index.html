@@ -287,7 +287,7 @@
     scrollWheelZoom: true,
     maxBounds: valpoBounds.pad(0.15),
     maxBoundsViscosity: 1.0,
-    minZoom: 13,
+    minZoom: 12,
     maxZoom: 18
   }).fitBounds(valpoBounds);
 
@@ -308,8 +308,9 @@
   });
 
   // Encuadra los pines sin salir del área permitida de Valparaíso
+  // (pad más grande = abre con menos zoom / vista más alejada)
   const group = L.featureGroup(markers);
-  map.fitBounds(group.getBounds().pad(0.3));
+  map.fitBounds(group.getBounds().pad(0.9));
 </script>
 
 </body>
