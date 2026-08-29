@@ -279,7 +279,7 @@
       </div>`;
   }
 
-  // ---- Límites: el mapa queda acotado solo al área de Valparaíso ----
+  // ---- Vista inicial: centrada en Valparaíso, sin límites de movimiento ----
   const valpoBounds = L.latLngBounds(
     L.latLng(-33.070, -71.660),  // suroeste
     L.latLng(-33.005, -71.590)   // noreste
@@ -287,11 +287,7 @@
 
   const map = L.map('map', {
     zoomControl: false,
-    scrollWheelZoom: true,
-    maxBounds: valpoBounds.pad(0.15),
-    maxBoundsViscosity: 1.0,
-    minZoom: 12,
-    maxZoom: 18
+    scrollWheelZoom: true
   }).fitBounds(valpoBounds);
 
   L.control.zoom({ position: 'bottomright' }).addTo(map);
