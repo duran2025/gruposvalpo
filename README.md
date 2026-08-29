@@ -6,7 +6,7 @@ Página estática de un solo archivo (`index.html`) con un mapa interactivo (Lea
 
 ```bash
 git init
-git add index.html README.md banner.png flyers
+git add index.html README.md banner.png banner-mobil.png flyers
 git commit -m "Mapa de grupos scout de Valparaíso"
 git branch -M main
 git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
@@ -39,7 +39,7 @@ const grupos = [
 
 - **Popup = flyer + botón de red social:** al tocar un pin, el mapa ya no muestra una tarjeta con texto — muestra directamente el afiche (flyer) del grupo, con un botón "Ver en Instagram/Facebook" debajo. Las imágenes están en la carpeta `flyers/` (`car.jpg`, `blascuevas.jpg`, `antumanke.jpg`, `gaspar.jpg`, `aquitania.jpg`). Para actualizar un afiche, reemplaza el archivo correspondiente manteniendo el mismo nombre.
 
-- **Encabezado con banner oficial:** el header ahora muestra `banner.png` (la imagen que enviaste, de la Agrupación Nacional de Boy Scouts de Chile — Localidad de Valparaíso) a todo el ancho. Si más adelante quieres cambiarla, solo reemplaza ese archivo por otro con el mismo nombre y las mismas proporciones (o ajusta `max-height` en el CSS si cambian mucho).
+- **Encabezado con banner oficial:** el header ahora muestra `banner.png` (la imagen que enviaste, de la Agrupación Nacional de Boy Scouts de Chile — Localidad de Valparaíso) a todo el ancho. En pantallas de celular (≤480px) se usa en cambio `banner-mobil.png`, una versión con el texto en dos líneas para que se lea bien en pantallas angostas. Si más adelante quieres cambiar cualquiera de las dos, reemplaza el archivo correspondiente manteniendo el mismo nombre.
 
 - **Mapa acotado a Valparaíso:** se definió `valpoBounds` (variable al final del `<script>`) que limita el arrastre y el zoom-out del mapa solo al área de Valparaíso. Si agregas un grupo fuera de ese rango, amplía esas coordenadas.
 - **Tiles sin API key:** se usa el servidor de tiles estándar de OpenStreetMap (`tile.openstreetmap.org`), gratuito y sin necesidad de registrarte. (La versión anterior usaba CARTO, que ahora exige una API key y por eso aparecía la marca de agua "API KEY REQUIRED".)
