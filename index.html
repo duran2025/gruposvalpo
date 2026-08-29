@@ -104,52 +104,46 @@
 
   .leaflet-popup-content-wrapper{
     background: var(--paper);
-    border-radius: 3px;
+    border-radius: 8px;
     box-shadow: 0 10px 30px rgba(14,35,44,0.35);
     border: 1px solid var(--line);
+    overflow: hidden;
+    padding: 0;
   }
   .leaflet-popup-tip{ background: var(--paper); }
-  .leaflet-popup-content{ margin: 0; width: min(240px, 78vw) !important; }
+  .leaflet-popup-content{
+    margin: 0;
+    width: min(260px, 82vw) !important;
+    max-height: 72vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   .leaflet-popup-close-button{
-    color: var(--khaki-dark) !important;
-    font-size: 22px !important;
-    padding: 8px 10px 0 0 !important;
-    width: 34px !important;
-    height: 34px !important;
+    color: var(--paper) !important;
+    background: rgba(14,35,44,0.55) !important;
+    border-radius: 50%;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    padding: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    top: 8px !important;
+    right: 8px !important;
   }
 
-  .card{ padding: 15px 15px 13px; border-top: 3px dashed var(--khaki); }
-  .card .kicker{
+  .flyer-card{ display:flex; flex-direction:column; }
+  .flyer-img{ display:block; width:100%; height:auto; }
+  .flyer-card a.social{
+    display:flex; align-items:center; justify-content:center; gap: 7px;
     font-family:'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    margin: 0 0 4px;
-  }
-  .card h3{
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 16.5px;
-    line-height: 1.22;
-    margin: 0 0 6px;
-    color: var(--ink);
-  }
-  .card .place{ font-size: 12.5px; color: var(--khaki-dark); margin: 0 0 10px; line-height: 1.35; }
-  .card .coord{ font-family:'IBM Plex Mono', monospace; font-size: 10px; color: rgba(35,40,29,0.55); margin: 0 0 12px; }
-  .card a.social{
-    display:inline-flex; align-items:center; gap: 6px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size: 12px; font-weight: 500;
+    font-size: 13px; font-weight: 600;
     text-decoration: none; color: var(--paper);
     background: var(--khaki);
-    padding: 9px 13px;
-    border-radius: 2px;
+    padding: 12px 14px;
     letter-spacing: 0.02em;
-    min-height: 38px;
   }
-  .card a.social:hover{ background: var(--khaki-dark); }
-  .card a.social svg{ width:14px; height:14px; }
+  .flyer-card a.social:hover{ background: var(--khaki-dark); }
+  .flyer-card a.social svg{ width:15px; height:15px; flex:0 0 auto; }
 
   .leaflet-touch .leaflet-control-zoom a{
     width: 38px !important;
@@ -212,6 +206,7 @@
       lugar: "Escuela Grecia",
       lat: -33.047194,
       lng: -71.611164,
+      flyer: "flyers/car.jpg",
       social: { tipo: "instagram", url: "https://www.instagram.com/capitanaquilesramirez/" }
     },
     {
@@ -219,6 +214,7 @@
       lugar: "Escuela Blas Cuevas",
       lat: -33.039491,
       lng: -71.634467,
+      flyer: "flyers/blascuevas.jpg",
       social: { tipo: "instagram", url: "https://www.instagram.com/gs_blascuevas/" }
     },
     {
@@ -226,6 +222,7 @@
       lugar: "Liceo Alfredo Nazar, Playa Ancha",
       lat: -33.027755,
       lng: -71.638435,
+      flyer: "flyers/antumanke.jpg",
       social: { tipo: "instagram", url: "https://www.instagram.com/grupo_antumanke/" }
     },
     {
@@ -233,6 +230,7 @@
       lugar: "Colegio Premilitar Víctor Antonio, Playa Ancha",
       lat: -33.030940,
       lng: -71.639150,
+      flyer: "flyers/gaspar.jpg",
       social: { tipo: "instagram", url: "https://www.instagram.com/gsgasparcabrales/" }
     },
     {
@@ -240,6 +238,7 @@
       lugar: "Escuela República Argentina",
       lat: -33.045022,
       lng: -71.626641,
+      flyer: "flyers/aquitania.jpg",
       social: { tipo: "facebook", url: "https://www.facebook.com/gruposcoutaquitaniadevalparaiso" }
     }
   ];
@@ -271,11 +270,8 @@
     const label = isIg ? "Ver en Instagram" : "Ver en Facebook";
     const icon = isIg ? igSvg : fbSvg;
     return `
-      <div class="card">
-        <p class="kicker">Grupo scout</p>
-        <h3>${g.nombre}</h3>
-        <p class="place">${g.lugar}</p>
-        <p class="coord">${g.lat.toFixed(5)}, ${g.lng.toFixed(5)}</p>
+      <div class="flyer-card">
+        <img class="flyer-img" src="${g.flyer}" alt="Afiche ${g.nombre}" loading="lazy">
         <a class="social" href="${g.social.url}" target="_blank" rel="noopener">${icon}${label}</a>
       </div>`;
   }

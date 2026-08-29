@@ -6,7 +6,7 @@ Página estática de un solo archivo (`index.html`) con un mapa interactivo (Lea
 
 ```bash
 git init
-git add index.html README.md banner.png
+git add index.html README.md banner.png flyers
 git commit -m "Mapa de grupos scout de Valparaíso"
 git branch -M main
 git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
@@ -36,6 +36,8 @@ const grupos = [
 ```
 
 ## Notas de esta versión
+
+- **Popup = flyer + botón de red social:** al tocar un pin, el mapa ya no muestra una tarjeta con texto — muestra directamente el afiche (flyer) del grupo, con un botón "Ver en Instagram/Facebook" debajo. Las imágenes están en la carpeta `flyers/` (`car.jpg`, `blascuevas.jpg`, `antumanke.jpg`, `gaspar.jpg`, `aquitania.jpg`). Para actualizar un afiche, reemplaza el archivo correspondiente manteniendo el mismo nombre.
 
 - **Encabezado con banner oficial:** el header ahora muestra `banner.png` (la imagen que enviaste, de la Agrupación Nacional de Boy Scouts de Chile — Localidad de Valparaíso) a todo el ancho. Si más adelante quieres cambiarla, solo reemplaza ese archivo por otro con el mismo nombre y las mismas proporciones (o ajusta `max-height` en el CSS si cambian mucho).
 
