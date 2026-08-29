@@ -36,3 +36,9 @@ const grupos = [
 ```
 
 **Pendiente:** la ubicación de **Grupo Scout Aquitania** es aproximada porque no se encontró una dirección exacta de su sede públicamente. Ajusta `lat`/`lng` en ese objeto cuando tengas el dato real.
+
+## Notas de esta versión
+
+- **Mapa acotado a Valparaíso:** se definió `valpoBounds` (variable al final del `<script>`) que limita el arrastre y el zoom-out del mapa solo al área de Valparaíso. Si agregas un grupo fuera de ese rango, amplía esas coordenadas.
+- **Tiles sin API key:** se usa el servidor de tiles estándar de OpenStreetMap (`tile.openstreetmap.org`), gratuito y sin necesidad de registrarte. (La versión anterior usaba CARTO, que ahora exige una API key y por eso aparecía la marca de agua "API KEY REQUIRED".)
+- **Optimizado para móvil:** botones de zoom y de cerrar el popup más grandes para el dedo, tarjetas de información que se ajustan al ancho de pantallas chicas, y se respetan los márgenes de "notch"/barra de estado (`env(safe-area-inset-*)`).

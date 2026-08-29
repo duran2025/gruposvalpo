@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Encuentra tu Grupo Scout — Valparaíso</title>
 <meta name="description" content="Mapa interactivo para encontrar los grupos scout de Valparaíso, Chile.">
 
@@ -27,16 +27,16 @@
     --line: rgba(35,40,29,0.16);
   }
 
-  *{ box-sizing: border-box; }
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   html,body{
     margin:0; padding:0; height:100%;
     background: var(--paper);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
+    overscroll-behavior: none;
   }
 
-  /* subtle paper texture via layered gradients */
   body{
     background-image:
       radial-gradient(circle at 20% 10%, rgba(255,255,255,0.35), transparent 45%),
@@ -52,10 +52,10 @@
 
   /* ---------- HEADER ---------- */
   header{
-    background: var(--navy);
-    background-image: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
     color: var(--paper);
-    padding: 18px 20px 16px;
+    padding: 14px 16px 12px;
+    padding-top: max(14px, env(safe-area-inset-top));
     position:relative;
     border-bottom: 3px solid var(--gold);
     flex: 0 0 auto;
@@ -67,20 +67,17 @@
     margin: 0 auto;
     display:flex;
     align-items:center;
-    gap:16px;
+    gap:12px;
   }
 
-  .badge{
-    flex: 0 0 auto;
-    width: 56px; height:56px;
-  }
+  .badge{ flex: 0 0 auto; width: 42px; height:42px; }
 
   .title-block{ flex: 1 1 auto; min-width:0; }
 
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 10px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold);
     margin: 0 0 2px;
@@ -89,45 +86,39 @@
   h1{
     font-family: 'Fraunces', serif;
     font-weight: 600;
-    font-size: clamp(22px, 4.2vw, 32px);
-    line-height: 1.05;
+    font-size: clamp(18px, 4.6vw, 26px);
+    line-height: 1.08;
     margin: 0;
     letter-spacing: -0.01em;
   }
 
   .sub{
     font-family:'IBM Plex Mono', monospace;
-    font-size: 12px;
+    font-size: 11px;
     color: rgba(239,230,206,0.75);
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   /* ---------- INSTRUCTION STRIP ---------- */
   .instruction{
     max-width: 1100px;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-family:'IBM Plex Mono', monospace;
-    font-size: 12.5px;
+    font-size: 11.5px;
+    line-height: 1.35;
     color: var(--khaki-dark);
     display:flex;
-    align-items:center;
-    gap:8px;
+    align-items:flex-start;
+    gap:7px;
     flex: 0 0 auto;
   }
-  .instruction svg{ flex:0 0 auto; }
+  .instruction svg{ flex:0 0 auto; margin-top: 1px; }
 
   /* ---------- MAP ---------- */
-  .map-wrap{
-    flex: 1 1 auto;
-    position: relative;
-    min-height: 0;
-  }
-  #map{
-    width:100%; height:100%;
-  }
+  .map-wrap{ flex: 1 1 auto; position: relative; min-height: 0; }
+  #map{ width:100%; height:100%; }
 
-  /* Leaflet overrides for a hand-drawn field-map feel */
   .leaflet-container{
     background: #dfe7de;
     font-family: 'Inter', sans-serif;
@@ -139,8 +130,8 @@
     transition: transform .15s ease;
   }
   .leaflet-marker-icon:hover .scout-pin{ transform: scale(1.08); }
+  .leaflet-marker-icon{ cursor: pointer; }
 
-  /* Popup styling: field-journal index card */
   .leaflet-popup-content-wrapper{
     background: var(--paper);
     border-radius: 3px;
@@ -148,17 +139,16 @@
     border: 1px solid var(--line);
   }
   .leaflet-popup-tip{ background: var(--paper); }
-  .leaflet-popup-content{ margin: 0; width: 240px !important; }
+  .leaflet-popup-content{ margin: 0; width: min(240px, 78vw) !important; }
   .leaflet-popup-close-button{
     color: var(--khaki-dark) !important;
-    font-size: 20px !important;
-    padding: 6px 8px 0 0 !important;
+    font-size: 22px !important;
+    padding: 8px 10px 0 0 !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 
-  .card{
-    padding: 16px 16px 14px;
-    border-top: 3px dashed var(--khaki);
-  }
+  .card{ padding: 15px 15px 13px; border-top: 3px dashed var(--khaki); }
   .card .kicker{
     font-family:'IBM Plex Mono', monospace;
     font-size: 10px;
@@ -170,56 +160,53 @@
   .card h3{
     font-family: 'Fraunces', serif;
     font-weight: 600;
-    font-size: 17px;
-    line-height: 1.2;
+    font-size: 16.5px;
+    line-height: 1.22;
     margin: 0 0 6px;
     color: var(--ink);
   }
-  .card .place{
-    font-size: 13px;
-    color: var(--khaki-dark);
-    margin: 0 0 10px;
-    line-height: 1.35;
-  }
-  .card .coord{
-    font-family:'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    color: rgba(35,40,29,0.55);
-    margin: 0 0 12px;
-  }
+  .card .place{ font-size: 12.5px; color: var(--khaki-dark); margin: 0 0 10px; line-height: 1.35; }
+  .card .coord{ font-family:'IBM Plex Mono', monospace; font-size: 10px; color: rgba(35,40,29,0.55); margin: 0 0 12px; }
   .card a.social{
-    display:inline-flex;
-    align-items:center;
-    gap: 6px;
+    display:inline-flex; align-items:center; gap: 6px;
     font-family:'IBM Plex Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--paper);
+    font-size: 12px; font-weight: 500;
+    text-decoration: none; color: var(--paper);
     background: var(--khaki);
-    padding: 7px 12px;
+    padding: 9px 13px;
     border-radius: 2px;
     letter-spacing: 0.02em;
+    min-height: 38px;
   }
   .card a.social:hover{ background: var(--khaki-dark); }
   .card a.social svg{ width:14px; height:14px; }
 
-  /* ---------- LEGEND / FOOTER ---------- */
+  .leaflet-touch .leaflet-control-zoom a{
+    width: 38px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    font-size: 18px !important;
+  }
+  .leaflet-control-attribution{ font-size: 9.5px !important; }
+
   footer{
     flex: 0 0 auto;
     background: var(--navy-deep);
     color: rgba(239,230,206,0.6);
     font-family:'IBM Plex Mono', monospace;
-    font-size: 10.5px;
+    font-size: 9.5px;
     text-align:center;
-    padding: 8px 12px;
+    padding: 6px 10px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
     letter-spacing: 0.03em;
   }
   footer a{ color: rgba(239,230,206,0.85); }
 
-  @media (max-width: 520px){
-    .badge{ width:44px; height:44px; }
-    .instruction{ font-size: 11.5px; }
+  @media (max-width: 480px){
+    header{ padding: 12px 12px 10px; padding-top: max(12px, env(safe-area-inset-top)); }
+    .badge{ width:36px; height:36px; }
+    .instruction{ font-size: 11px; padding: 7px 12px; }
+    footer{ display: none; }
   }
 </style>
 </head>
@@ -230,16 +217,15 @@
   <header>
     <div class="header-inner">
       <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 64 64" width="56" height="56">
+        <svg viewBox="0 0 64 64" width="42" height="42">
           <circle cx="32" cy="32" r="30" fill="var(--gold)" stroke="var(--paper)" stroke-width="2"/>
           <circle cx="32" cy="32" r="24" fill="none" stroke="var(--paper)" stroke-width="1.2" stroke-dasharray="2 3"/>
-          <path d="M32 14 C36 22, 44 24, 44 32 C44 40, 36 42, 32 50 C28 42, 20 40, 20 32 C20 24, 28 22, 32 14 Z"
-                fill="var(--navy-deep)"/>
+          <path d="M32 14 C36 22, 44 24, 44 32 C44 40, 36 42, 32 50 C28 42, 20 40, 20 32 C20 24, 28 22, 32 14 Z" fill="var(--navy-deep)"/>
           <circle cx="32" cy="32" r="3.2" fill="var(--gold)"/>
         </svg>
       </div>
       <div class="title-block">
-        <p class="eyebrow">Región de Valparaíso · V región</p>
+        <p class="eyebrow">Valparaíso · V región</p>
         <h1>Encuentra tu Grupo Scout</h1>
         <p class="sub">Mapa de campo · Grupos scout activos en Valparaíso</p>
       </div>
@@ -247,8 +233,8 @@
   </header>
 
   <div class="instruction">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-    Toca un pin en el mapa para ver la sede, el colegio y el contacto de cada grupo.
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    Toca un pin para ver la sede, el colegio y el contacto de cada grupo.
   </div>
 
   <div class="map-wrap">
@@ -256,16 +242,15 @@
   </div>
 
   <footer>
-    Mapas © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> colaboradores · Estilo © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>
+    Mapa © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> colaboradores
   </footer>
 
 </div>
 
 <script>
   // ---- Datos de los grupos scout ----
-  // Nota: la ubicación de "Aquitania" es aproximada (sector Placeres/centro de
-  // Valparaíso) porque no se encontró una dirección exacta publicada.
-  // Ajusta lat/lng si tienes la dirección real de su sede.
+  // Nota: la ubicación de "Aquitania" es aproximada porque no se encontró
+  // una dirección exacta publicada. Ajusta lat/lng si tienes el dato real.
   const grupos = [
     {
       nombre: "Grupo Scout Capitán Aquiles Ramírez",
@@ -340,30 +325,40 @@
       </div>`;
   }
 
-  // ---- Mapa ----
+  // ---- Límites: el mapa queda acotado solo al área de Valparaíso ----
+  const valpoBounds = L.latLngBounds(
+    L.latLng(-33.070, -71.660),  // suroeste
+    L.latLng(-33.005, -71.590)   // noreste
+  );
+
   const map = L.map('map', {
     zoomControl: false,
-    scrollWheelZoom: true
-  }).setView([-33.0405, -71.6220], 14);
+    scrollWheelZoom: true,
+    maxBounds: valpoBounds.pad(0.15),
+    maxBoundsViscosity: 1.0,
+    minZoom: 13,
+    maxZoom: 18
+  }).fitBounds(valpoBounds);
 
   L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  // Tiles de OpenStreetMap: gratuitos, sin necesidad de API key
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; OpenStreetMap &copy; CARTO'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
   const markers = [];
   grupos.forEach(g => {
     const m = L.marker([g.lat, g.lng], { icon: pinIcon() })
       .addTo(map)
-      .bindPopup(cardHtml(g));
+      .bindPopup(cardHtml(g), { autoPanPadding: [20, 60] });
     markers.push(m);
   });
 
-  // Encuadrar todos los pines al cargar
+  // Encuadra los pines sin salir del área permitida de Valparaíso
   const group = L.featureGroup(markers);
-  map.fitBounds(group.getBounds().pad(0.25));
+  map.fitBounds(group.getBounds().pad(0.3));
 </script>
 
 </body>
