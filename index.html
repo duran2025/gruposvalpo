@@ -170,6 +170,9 @@
     header img.banner{ max-height: 16vh; }
     .instruction{ font-size: 11px; padding: 7px 12px; }
     footer{ display: none; }
+
+    /* Flyer 30% más chico en móvil: 260px*0.7=182px, 82vw*0.7≈57vw */
+    .leaflet-popup-content{ width: min(182px, 57vw) !important; }
   }
 </style>
 </head>
